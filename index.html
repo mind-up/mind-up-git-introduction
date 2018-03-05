@@ -9,6 +9,12 @@
 	</head>
 	<body>
 		<div class="slide">
+			<h1>Prérequis</h1>
+			<p>Un ordinateur</p>
+			<p>Git installé sur votre ordinateur : <a href="https://git-scm.com/download/win">Windows</a>, <a href="https://git-scm.com/download/mac">Mac OS X</a>, <a href="https://git-scm.com/download/linux">Linux</a></p>
+			<p>Un compte <a href="https://github.com">GitHub</a></p>
+		</div>
+		<div class="slide">
 			<h1>Bonjour</h1>
 		</div>
 		<div class="slide">
@@ -35,11 +41,15 @@
 			<h1>${variable}</h1>
 		</div>
 		<div class="slide">
+			<h1><a href="https://rogerdudler.github.io/git-guide/index.fr.html">git - petit guide</a></h1>
+		</div>
+		<div class="slide">
 			<h1>Ce site est moche !</h1>
+			<p>Changeons les couleurs.</p>
 		</div>
 		<div class="slide">
 			<h1>Trouver les sources, aka "upstream"</h1>
-			<a href="https://github.com/mind-up/mind-up-git-introduction">Les sources</a>
+			<p><a href="https://github.com/mind-up/mind-up-git-introduction">https://github.com/mind-up/mind-up-git-introduction</a></p>
 		</div>
 		<div class="slide">
 			<h1>Faire un fork</h1>
@@ -51,7 +61,110 @@
 		</div>
 		<div class="slide">
 			<h1>Cloner origin</h1>
-			<p>$ git clone </p>
+			<p class="code">$ git clone https://github.com/${username}/mind-up-git-introduction.git</p>
+		</div>
+		<div class="slide">
+			<h1>Aller dans le dossier</h1>
+			<p class="code">$ cd mind-up-git-introduction</p>
+			<p class="code">$ ls</p>
+			<p class="code">$ dir</p>
+		</div>
+		<div class="slide">
+			<h1>Status</h1>
+			<p class="code">$ git remote -v</p>
+			<p class="code">$ git branch -a</p>
+			<p class="code">$ git status</p>
+			<p class="code">$ git log</p>
+		</div>
+		<div class="slide">
+			<h1>Ajouter la référence vers upstream</h1>
+			<p class="code">$ git remote add upstream https://github.com/mind-up/mind-up-git-introduction.git</p>
+			<p class="code">$ git remote -v</p>
+			<p class="code">$ git branch -a</p>
+			<p class="code">$ git status</p>
+		</div>
+		<div class="slide">
+			<h1>Créer une branche, pour compartimenter</h1>
+			<p class="code">$ git checkout -b ${branche}</p>
+		</div>
+		<div class="slide">
+			<h1>Partir d'une base saine</h1>
+			<p class="code">$ git reset --hard upstream/master</p>
+		</div>
+		<div class="slide">
+			<h1>Status</h1>
+			<p class="code">$ git remote -v</p>
+			<p class="code">$ git branch -a</p>
+			<p class="code">$ git status</p>
+			<p class="code">$ git log</p>
+		</div>
+		<div class="slide">
+			<h1>Trouver où travailler</h1>
+			<p class="code">$ grep -nr '${mot}' ./</p>
+		</div>
+		<div class="slide">
+			<h1>Travailler</h1>
+		</div>
+		<div class="slide">
+			<h1>Vérifier ses changement</h1>
+			<p class="code">$ git diff</p>
+		</div>
+		<div class="slide">
+			<h1>Ajouter ses changements</h1>
+			<p class="code">$ git add ${fichiers}</p>
+		</div>
+		<div class="slide">
+			<h1>Acter ses changements</h1>
+			<p class="code">$ git commit -m "${message}"</p>
+		</div>
+		<div class="slide">
+			<h1>Envoyer ses changements</h1>
+			<p class="code">$ git push origin master</p>
+		</div>
+		<div class="slide">
+			<h1>Faire une Pull Request</h1>
+			<p>https://github.com/${username}/mind-up-git-introduction</p>
+		</div>
+		<div class="slide">
+			<h1>Discuter les changements</h1>
+		</div>
+		<div class="slide">
+			<h1>Ajouter de nouveaux changements</h1>
+			<p>Travailler</p>
+			<p>Vérifier ses changement</p>
+			<p>Ajouter ses changements</p>
+			<p>Acter ses changements</p>
+			<p>Envoyer ses changements</p>
+		</div>
+		<div class="slide">
+			<h1>Vérifier les changements</h1>
+		</div>
+		<div class="slide">
+			<h1>Travis CI</h1>
+			<p><a href="https://docs.travis-ci.com/user/for-beginners">Les concepts de base</a></p>
+		</div>
+		<div class="slide">
+			<h1>Valider les changements</h1>
+			<img alt="image github">
+		</div>
+		<div class="slide">
+			<h1>Supprimer sa branches en ligne</h1>
+			<img alt="image github">
+		</div>
+		<div class="slide">
+			<h1>Créer une nouvelle branche</h1>
+			<p class="code">$ git checkout -b ${branche}</p>
+		</div>
+		<div class="slide">
+			<h1>Partir d'une base saine</h1>
+			<p class="code">$ git reset --hard upstream/master</p>
+		</div>
+		<div class="slide">
+			<h1>Status</h1>
+			<p class="code">$ git remote -v</p>
+			<p class="code">$ git branch -a</p>
+			<p class="code">$ git status</p>
+			<p class="code">$ git log</p>
 		</div>
 		<script src="script.js"></script>
 	</body>

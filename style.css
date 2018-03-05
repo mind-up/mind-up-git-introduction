@@ -4,6 +4,8 @@
 
 p {
 	text-align: justify;
+	padding: 0.5em;
+	font-size: 1.5em;
 }
 
 body {
@@ -12,11 +14,19 @@ body {
 }
 
 .slide {
-	/*height: 100%;*/
+	height: 100%;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	display: flex;
 	max-width: 700px;
 	margin: auto;
+	display: flex;
+}
+
+.code {
+	background: rgba(0,0,0,0.05);
+	border-radius: 3px;
+	font-family: Consolas, monospace;
+	white-space: nowrap;
+	overflow: auto;
 }
