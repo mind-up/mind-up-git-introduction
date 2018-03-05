@@ -1,0 +1,22 @@
+* {
+	font-family: arial, sans-serif;
+}
+
+p {
+	text-align: justify;
+}
+
+body {
+	height: 100vh;
+	margin: 0;
+}
+
+.slide {
+	/*height: 100%;*/
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	display: flex;
+	max-width: 700px;
+	margin: auto;
+}
