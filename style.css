@@ -87,3 +87,56 @@ body {
 #merci {
 	overflow: auto;
 }
+
+#schema {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+}
+
+#schema * {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-size: 1em;
+}
+
+#upstream {
+	background-color: #ccf;
+}
+
+#upstream .branch {
+	background-color: #aaf;
+}
+
+.branches {
+	display: flex;
+	justify-content: center;
+}
+
+#schema .repo,
+#schema .branch {
+	padding: 0.5em;
+}
+
+#forks {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 1em;
+}
+
+.fork {
+	background-color: #ddf;
+}
+
+#schema .branch {
+	background-color: #bbf;
+	margin: 0.5em;
+}
