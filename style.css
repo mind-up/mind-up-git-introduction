@@ -24,9 +24,13 @@ body {
 }
 
 .code {
-	background: rgba(0,0,0,0.05);
+	background: rgba(0, 0, 0, 0.05);
 	border-radius: 3px;
 	font-family: Consolas, monospace;
 	white-space: nowrap;
+	overflow: auto;
+}
+
+#merci {
 	overflow: auto;
 }
