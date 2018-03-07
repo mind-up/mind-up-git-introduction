@@ -256,8 +256,10 @@ const colors = [
 	"#01ff01",
 	"#00ff00"
 ];
-let id = 0;
 const url = 'https://api.github.com/repos/mind-up/mind-up-git-introduction/forks';
+const intervalMerci = 1000;
+let id = 0;
+let merciId = -1;
 
 
 function main() {
@@ -268,15 +270,21 @@ function main() {
 			id++;
 		} else if (event.key === 'ArrowLeft') {
 			id--;
+		} else {
+			return;
 		}
+		const go = (id >= 0 && id < document.getElementsByClassName('slide').length);
 		id = Math.max(0, Math.min(id, document.getElementsByClassName('slide').length-1));
-		showSlide(id);
+		if(go) {
+			showSlide(id);
+		}
 	});
 }
 
 
 function hideSlides() {
 	let slides = document.getElementsByClassName('slide');
+	merciId = slides.length - 1;
 	for(let i = 0 ; i < slides.length ; i++) {
 		slides[i].style.display = 'none';
 	};
@@ -287,6 +295,51 @@ function showSlide(id) {
 	hideSlides();
 	document.getElementsByClassName('slide')[id].style.display = 'flex';
 	document.getElementsByClassName('slide')[id].style.backgroundColor = colors[id % colors.length];
+	document.getElementsByClassName('slide')[id].style.backgroundColor = colors[id];
+	if(id === merciId) {
+		merci();
+	}
+}
+
+
+function httpGetAsync(theUrl, callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			callback(xmlHttp.responseText);
+	}
+	xmlHttp.open("GET", theUrl, true);
+	xmlHttp.send(null);
+}
+
+
+function merci() {
+	console.log('merci');
+	document.getElementById('merci').innerHTML = '';
+	httpGetAsync(url, function(result) {
+		merciNext(JSON.parse(result));
+	});
+}
+
+
+function merciNext(forks) {
+	if(forks.length) {
+		setTimeout(function() {
+			const fork = forks.pop();
+			console.log('Merci', fork.owner.login);
+			let div = document.createElement('div');
+			div.className = 'login';
+			const rand = Math.floor(Math.random() * Math.floor(2));
+			const r = String.fromCharCode(rand === 0 ? '0'.charCodeAt() : Math.floor(Math.random() * Math.floor(5)) + 'a'.charCodeAt() );
+			const g = String.fromCharCode(rand === 1 ? '0'.charCodeAt() : Math.floor(Math.random() * Math.floor(5)) + 'a'.charCodeAt() );
+			const b = String.fromCharCode(rand === 2 ? '0'.charCodeAt() : Math.floor(Math.random() * Math.floor(5)) + 'a'.charCodeAt() );
+			div.innerHTML = `
+				<p>Merci <span style="color:#${r}${g}${b}">${fork.owner.login}</span></p>
+			`;
+			document.getElementById('merci').prepend(div);
+			merciNext(forks);
+		}, intervalMerci);
+	}
 }
 
 
