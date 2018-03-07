@@ -68,7 +68,8 @@ body {
 	padding: 0.5em;
 }
 
-#forks {
+#forks,
+#working {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
@@ -139,4 +140,8 @@ body {
 #schema .branch {
 	background-color: #bbf;
 	margin: 0.5em;
+}
+
+#spacer {
+	flex-grow: 1;
 }
