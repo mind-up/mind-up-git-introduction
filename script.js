@@ -285,7 +285,7 @@ function hideSlides() {
 function showSlide(id) {
 	hideSlides();
 	document.getElementsByClassName('slide')[id].style.display = 'flex';
-	document.getElementsByClassName('slide')[id].style.backgroundColor = colors[id];
+	document.getElementsByClassName('slide')[id].style.backgroundColor = colors[id % colors.length];
 }
 
 
