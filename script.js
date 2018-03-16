@@ -1,5 +1,4 @@
-const colors = [
-	"#ffffff",
+const colors = [ "#ffffff",
 	"#fefffe",
 	"#fdfffd",
 	"#fcfffc",
@@ -258,6 +257,17 @@ const colors = [
 ];
 const url = 'https://api.github.com/repos/mind-up/mind-up-git-introduction/forks';
 const intervalMerci = 1000;
+const LINE_WIDTH = 5;
+const COLOR_UP = '#080';
+const ARROW_A = 8;
+const ARROW_B = 12;
+const SLIDE_ID_FOR_STEP = [
+	4,
+	5,
+	6,
+	7,
+];
+const COLOR_LINES_BASE = '#aaa';
 let id = 0;
 let merciId = -1;
 
@@ -299,11 +309,308 @@ function showSlide(id) {
 	if(id === merciId) {
 		merci();
 	}
+	drawSchema(id);
+	console.log(id);
+	document.getElementById('current-page').textContent = id+1;
+	document.getElementById('page-max').textContent = document.getElementsByClassName('slide').length;
+}
+
+
+// https://stackoverflow.com/a/46921780/2801718
+function getCenter(id) {
+	let e = document.getElementById(id);
+	return {
+		x: e.offsetLeft + e.offsetWidth / 2,
+		y: e.offsetTop + e.offsetHeight / 2
+	};
+}
+
+
+function getTop(id) {
+	let e = document.getElementById(id);
+	return {
+		x: e.offsetLeft + e.offsetWidth / 2,
+		y: e.offsetTop
+	};
+}
+
+
+function getBottom(id) {
+	let e = document.getElementById(id);
+	return {
+		x: e.offsetLeft + e.offsetWidth / 2,
+		y: e.offsetTop + e.offsetHeight
+	};
+}
+
+
+function getLeft(id) {
+	let e = document.getElementById(id);
+	return {
+		x: e.offsetLeft,
+		y: e.offsetTop + e.offsetHeight / 2
+	};
+}
+
+
+function getRight(id) {
+	let e = document.getElementById(id);
+	return {
+		x: e.offsetLeft + e.offsetWidth,
+		y: e.offsetTop + e.offsetHeight / 2
+	};
+}
+
+
+function bezierCurveFromTo($) {
+//ctx, a, b, type, inversed, color
+	let strokeStyle = $.ctx.strokeStyle;
+	let fillStyle = $.ctx.fillStyle;
+	$.ctx.strokeStyle = $.color;
+	$.ctx.fillStyle = $.color;
+	if($.direction === 'up') {
+		$.ctx.strokeStyle = COLOR_UP;
+		$.ctx.fillStyle = COLOR_UP;
+	}
+	switch($.type) {
+		case 't':
+			$.ctx.setLineDash([LINE_WIDTH*2, LINE_WIDTH]);
+			break;
+		default:
+			$.ctx.setLineDash([]);
+			break;
+	}
+	$.ctx.beginPath();
+	const ax = getCenter($.a).x;
+	const ay = getCenter($.a).y;
+	let bx = getCenter($.b).x;
+	let by = getCenter($.b).y;
+	switch($.bPos) {
+		case 'top':
+			bx = getTop($.b).x;
+			by = getTop($.b).y - ARROW_A;
+			break;
+		case 'bottom':
+			bx = getBottom($.b).x;
+			by = getBottom($.b).y + ARROW_A;
+			break;
+		case 'left':
+			bx = getLeft($.b).x - ARROW_A;
+			by = getLeft($.b).y;
+			break;
+		case 'right':
+			bx = getRight($.b).x + ARROW_A;
+			by = getRight($.b).y;
+			break;
+	}
+	$.ctx.moveTo(
+		ax,
+		ay,
+	);
+	$.ctx.bezierCurveTo(
+		$.inversed ? ax : bx,
+		$.inversed ? by : ay,
+		$.inversed ? ax : bx,
+		$.inversed ? by : ay,
+		bx,
+		by
+	);
+	$.ctx.stroke();
+	$.ctx.setLineDash([]);
+	switch($.bPos) {
+		case 'top':
+			$.ctx.beginPath();
+			$.ctx.moveTo(
+				getTop($.b).x,
+				getTop($.b).y,
+			);
+			$.ctx.lineTo(
+				getTop($.b).x - ARROW_A,
+				getTop($.b).y - ARROW_B,
+			);
+			$.ctx.lineTo(
+				getTop($.b).x + ARROW_A,
+				getTop($.b).y - ARROW_B,
+			);
+			$.ctx.lineTo(
+				getTop($.b).x,
+				getTop($.b).y,
+			);
+			$.ctx.fill();
+			break;
+		case 'bottom':
+			$.ctx.beginPath();
+			$.ctx.moveTo(
+				getBottom($.b).x,
+				getBottom($.b).y,
+			);
+			$.ctx.lineTo(
+				getBottom($.b).x - ARROW_A,
+				getBottom($.b).y + ARROW_B,
+			);
+			$.ctx.lineTo(
+				getBottom($.b).x + ARROW_A,
+				getBottom($.b).y + ARROW_B,
+			);
+			$.ctx.lineTo(
+				getBottom($.b).x,
+				getBottom($.b).y,
+			);
+			$.ctx.fill();
+			break;
+		case 'left':
+			$.ctx.beginPath();
+			$.ctx.moveTo(
+				getLeft($.b).x,
+				getLeft($.b).y,
+			);
+			$.ctx.lineTo(
+				getLeft($.b).x - ARROW_B,
+				getLeft($.b).y + ARROW_A,
+			);
+			$.ctx.lineTo(
+				getLeft($.b).x - ARROW_B,
+				getLeft($.b).y - ARROW_A,
+			);
+			$.ctx.lineTo(
+				getLeft($.b).x,
+				getLeft($.b).y,
+			);
+			$.ctx.fill();
+			break;
+		case 'right':
+			$.ctx.beginPath();
+			$.ctx.moveTo(
+				getRight($.b).x,
+				getRight($.b).y,
+			);
+			$.ctx.lineTo(
+				getRight($.b).x + ARROW_B,
+				getRight($.b).y + ARROW_A,
+			);
+			$.ctx.lineTo(
+				getRight($.b).x + ARROW_B,
+				getRight($.b).y - ARROW_A,
+			);
+			$.ctx.lineTo(
+				getRight($.b).x,
+				getRight($.b).y,
+			);
+			$.ctx.fill();
+			break;
+	}
+	$.ctx.strokeStyle = strokeStyle;
+	$.ctx.fillStyle = fillStyle;
+}
+
+function showSchemaStep(id, stepId) {
+	console.log(id, SLIDE_ID_FOR_STEP[id])
+	if(SLIDE_ID_FOR_STEP[id] === undefined) {
+		console.error('Undefined id in showSchemaStep');
+	}
+	return (id >= SLIDE_ID_FOR_STEP[stepId] || id === 0);
+}
+
+function drawSchema(id) {
+	console.log('e')
+	let c = document.getElementById('canvas');
+	let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+	let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+	c.width = w;
+	c.height = h;
+	let ctx = c.getContext('2d');
+	ctx.lineWidth = LINE_WIDTH;
+	ctx.strokeStyle = COLOR_LINES_BASE;
+	ctx.fillStyle = ctx.strokeStyle;
+	// fork loic
+	if(showSchemaStep(id, 0)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'upstream-master',
+		b:'loic-master',
+		aPos: 'left',
+		bPos: 'top'});
+	// fork jessy
+	if(showSchemaStep(id, 1)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'upstream-master',
+		b:'jessy-master',
+		aPos: 'left',
+		bPos: 'top'});
+	// clone loic
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'loic-master',
+		b:'loic-working-master',
+		bPos: 'top'});
+	// checkout -b loic
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'loic-working-master',
+		b:'loic-working-feature-1',
+		bPos: 'left'});
+	// reset loic
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'upstream-master',
+		b:'loic-working-feature-1',
+		type: 't',
+		inversed: true,
+		bPos: 'right'});
+	// push loic
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'loic-working-feature-1',
+		b:'loic-feature-1',
+		direction: 'up',
+		bPos: 'bottom'});
+	// PR loic
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'loic-feature-1',
+		b:'upstream-master',
+		inversed: true,
+		direction: 'up',
+		bPos: 'left'});
+	// clone jessy
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'jessy-master',
+		b:'jessy-working-master',
+		bPos: 'top'});
+	// checkout -b jessy
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'jessy-working-master',
+		b:'jessy-working-feature-2',
+		bPos: 'right'});
+	// reset jessy
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'upstream-master',
+		b:'jessy-working-feature-2',
+		type: 't',
+		inversed: true,
+		bPos: 'left'});
+	// push jessy
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'jessy-working-feature-2',
+		b:'jessy-feature-2',
+		direction: 'up',
+		bPos: 'bottom'});
+	// PR jessy
+	if(showSchemaStep(id)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'jessy-feature-2',
+		b:'upstream-master',
+		inversed: true,
+		direction: 'up',
+		bPos: 'right'});
 }
 
 
 function httpGetAsync(theUrl, callback) {
-	var xmlHttp = new XMLHttpRequest();
+	let xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
 			callback(xmlHttp.responseText);
