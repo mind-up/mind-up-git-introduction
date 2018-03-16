@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 const colors = [ "#ffffff",
+=======
+const colors = [
+	"#ffffff",
+>>>>>>> 68dc1e657e9fed5b42b34bba0717af8f5b729383
 	"#fefffe",
 	"#fdfffd",
 	"#fcfffc",
@@ -257,6 +262,7 @@ const colors = [ "#ffffff",
 ];
 const url = 'https://api.github.com/repos/mind-up/mind-up-git-introduction/forks';
 const intervalMerci = 1000;
+
 const LINE_WIDTH = 5;
 const COLOR_UP = '#080';
 const ARROW_A = 8;
@@ -309,6 +315,7 @@ function showSlide(id) {
 	if(id === merciId) {
 		merci();
 	}
+<<<<<<< HEAD
 	drawSchema(id);
 	console.log(id);
 	document.getElementById('current-page').textContent = id+1;
@@ -637,11 +644,17 @@ function drawSchema(id) {
 		inversed: true,
 		direction: 'up',
 		bPos: 'right'});
+=======
+>>>>>>> 68dc1e657e9fed5b42b34bba0717af8f5b729383
 }
 
 
 function httpGetAsync(theUrl, callback) {
+<<<<<<< HEAD
 	let xmlHttp = new XMLHttpRequest();
+=======
+	var xmlHttp = new XMLHttpRequest();
+>>>>>>> 68dc1e657e9fed5b42b34bba0717af8f5b729383
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
 			callback(xmlHttp.responseText);

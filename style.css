@@ -35,6 +35,7 @@ body {
 	overflow: auto;
 }
 
+<<<<<<< HEAD
 #schema {
 	top: 0;
 	left: 0;
@@ -184,4 +185,8 @@ body {
 	position: absolute;
 	margin: 0;
 	padding: 1em;
+}
+
+#merci {
+	overflow: auto;
 }
