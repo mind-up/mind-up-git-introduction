@@ -23,12 +23,168 @@ body {
 	display: flex;
 }
 
+.slide * {
+	z-index: 50;
+}
+
 .code {
 	background: rgba(0, 0, 0, 0.05);
 	border-radius: 3px;
 	font-family: Consolas, monospace;
 	white-space: nowrap;
 	overflow: auto;
+}
+
+
+#schema {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+}
+
+#schema * {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-size: 1em;
+}
+
+#upstream {
+	background-color: #ccf;
+}
+
+#upstream .branch {
+	background-color: #aaf;
+}
+
+.branches {
+	display: flex;
+	justify-content: center;
+}
+
+#schema .repo,
+#schema .branch {
+	padding: 0.5em;
+}
+
+#forks,
+#working {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 1em;
+}
+
+.fork {
+	background-color: #ddf;
+}
+
+#schema .branch {
+	background-color: #bbf;
+	margin: 0.5em;
+}
+
+#merci {
+	overflow: auto;
+}
+
+#schema {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+}
+
+#schema * {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-size: 1em;
+}
+
+#upstream {
+	background-color: #ccf;
+}
+
+#upstream .branch {
+	background-color: #aaf;
+}
+
+.branches {
+	display: flex;
+	justify-content: space-around;
+	width: 45em;
+}
+
+#schema .repo,
+#schema .branch {
+	padding: 0.5em;
+}
+
+
+#schema .repo * {
+	z-index: 1;
+}
+
+#forks,
+#working {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 1em;
+}
+
+.fork {
+	background-color: #ddf;
+}
+
+#schema .branch {
+	background-color: #bbf;
+	margin: 0.5em;
+}
+
+#spacer {
+	flex-grow: 1;
+}
+
+#canvas {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none;
+}
+
+.branch {
+	width: 19em;
+}
+
+.branch a {
+	color: #000;
+}
+
+.branch a .light-text {
+	color: #777;
+}
+
+#infos {
+	top: 0;
+	right: 0;
+	position: absolute;
+	margin: 0;
+	padding: 1em;
 }
 
 #merci {
