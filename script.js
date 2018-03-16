@@ -508,11 +508,25 @@ function showSchemaStep(id, stepId) {
 	if(SLIDE_ID_FOR_STEP[id] === undefined) {
 		console.error('Undefined id in showSchemaStep');
 	}
-	return (id >= SLIDE_ID_FOR_STEP[stepId] || id === 0);
+	//return (id >= SLIDE_ID_FOR_STEP[stepId] /*|| id === 0*/);
+	return (id >= stepId-1 /*|| id === 0*/);
+}
+
+
+function hideBoxes() {
+	let boxes = document.getElementsByClassName('box');
+	for(var i=0; i<boxes.length; i++) {
+		boxes[i].style.visibility = 'hidden';
+	}
+	
+	
+}
+
+function showBox(id) {
+	document.getElementById(id).style.visibility = 'visible';
 }
 
 function drawSchema(id) {
-	console.log('e')
 	let c = document.getElementById('canvas');
 	let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -522,84 +536,101 @@ function drawSchema(id) {
 	ctx.lineWidth = LINE_WIDTH;
 	ctx.strokeStyle = COLOR_LINES_BASE;
 	ctx.fillStyle = ctx.strokeStyle;
+	
+	hideBoxes();
+	
+	// trouver origin
+	if(showSchemaStep(id, 9)) showBox('upstream');
 	// fork loic
-	if(showSchemaStep(id, 0)) bezierCurveFromTo({
+	if(showSchemaStep(id, 10)) showBox('loic-fork');
+	if(showSchemaStep(id, 10)) bezierCurveFromTo({
 		ctx:ctx,
 		a:'upstream-master',
 		b:'loic-master',
 		aPos: 'left',
 		bPos: 'top'});
 	// fork jessy
-	if(showSchemaStep(id, 1)) bezierCurveFromTo({
+	if(showSchemaStep(id, 10)) showBox('jessy-fork');
+	if(showSchemaStep(id, 10)) bezierCurveFromTo({
 		ctx:ctx,
 		a:'upstream-master',
 		b:'jessy-master',
 		aPos: 'left',
 		bPos: 'top'});
 	// clone loic
-	if(showSchemaStep(id)) bezierCurveFromTo({
+	if(showSchemaStep(id, 12)) showBox('loic-working');
+	if(showSchemaStep(id, 12)) bezierCurveFromTo({
 		ctx:ctx,
 		a:'loic-master',
 		b:'loic-working-master',
 		bPos: 'top'});
+	// clone jessy
+	if(showSchemaStep(id, 12)) showBox('jessy-working');
+	if(showSchemaStep(id, 12)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'jessy-master',
+		b:'jessy-working-master',
+		bPos: 'top'});
+
+
+
+
 	// checkout -b loic
-	if(showSchemaStep(id)) bezierCurveFromTo({
+	if(showSchemaStep(id, 16)) showBox('loic-working-feature-1');
+	if(showSchemaStep(id, 16)) bezierCurveFromTo({
 		ctx:ctx,
 		a:'loic-working-master',
 		b:'loic-working-feature-1',
 		bPos: 'left'});
+	// checkout -b jessy
+	if(showSchemaStep(id, 16)) showBox('jessy-working-feature-2');
+	if(showSchemaStep(id, 16)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'jessy-working-master',
+		b:'jessy-working-feature-2',
+		bPos: 'right'});
 	// reset loic
-	if(showSchemaStep(id)) bezierCurveFromTo({
+	if(showSchemaStep(id, 17)) bezierCurveFromTo({
 		ctx:ctx,
 		a:'upstream-master',
 		b:'loic-working-feature-1',
 		type: 't',
 		inversed: true,
 		bPos: 'right'});
+	// reset jessy
+	if(showSchemaStep(id, 17)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'upstream-master',
+		b:'jessy-working-feature-2',
+		type: 't',
+		inversed: true,
+		bPos: 'left'});
 	// push loic
-	if(showSchemaStep(id)) bezierCurveFromTo({
+	if(showSchemaStep(id, 24)) showBox('loic-feature-1');
+	if(showSchemaStep(id, 24)) bezierCurveFromTo({
 		ctx:ctx,
 		a:'loic-working-feature-1',
 		b:'loic-feature-1',
 		direction: 'up',
 		bPos: 'bottom'});
+	// push jessy
+	if(showSchemaStep(id, 24)) showBox('jessy-feature-2');
+	if(showSchemaStep(id, 24)) bezierCurveFromTo({
+		ctx:ctx,
+		a:'jessy-working-feature-2',
+		b:'jessy-feature-2',
+		direction: 'up',
+		bPos: 'bottom'});
 	// PR loic
-	if(showSchemaStep(id)) bezierCurveFromTo({
+	if(showSchemaStep(id, 30)) bezierCurveFromTo({
 		ctx:ctx,
 		a:'loic-feature-1',
 		b:'upstream-master',
 		inversed: true,
 		direction: 'up',
 		bPos: 'left'});
-	// clone jessy
-	if(showSchemaStep(id)) bezierCurveFromTo({
-		ctx:ctx,
-		a:'jessy-master',
-		b:'jessy-working-master',
-		bPos: 'top'});
-	// checkout -b jessy
-	if(showSchemaStep(id)) bezierCurveFromTo({
-		ctx:ctx,
-		a:'jessy-working-master',
-		b:'jessy-working-feature-2',
-		bPos: 'right'});
-	// reset jessy
-	if(showSchemaStep(id)) bezierCurveFromTo({
-		ctx:ctx,
-		a:'upstream-master',
-		b:'jessy-working-feature-2',
-		type: 't',
-		inversed: true,
-		bPos: 'left'});
-	// push jessy
-	if(showSchemaStep(id)) bezierCurveFromTo({
-		ctx:ctx,
-		a:'jessy-working-feature-2',
-		b:'jessy-feature-2',
-		direction: 'up',
-		bPos: 'bottom'});
 	// PR jessy
-	if(showSchemaStep(id)) bezierCurveFromTo({
+	if(showSchemaStep(id, 30)) bezierCurveFromTo({
 		ctx:ctx,
 		a:'jessy-feature-2',
 		b:'upstream-master',

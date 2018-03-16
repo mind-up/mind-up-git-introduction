@@ -48,12 +48,13 @@
 			<p>Changeons les couleurs.</p>
 		</div>
 		<div class="slide">
-			<h1>Trouver les sources, aka "upstream"</h1>
+			<h1>Trouver le repo source, aka "upstream"</h1>
 			<p><a href="https://github.com/mind-up/mind-up-git-introduction">https://github.com/mind-up/mind-up-git-introduction</a></p>
 		</div>
 		<div class="slide">
-			<h1>Faire un fork</h1>
+			<h1>Faire un fork de la branche "master"</h1>
 			<p>Petit bouton en haut à droite</p>
+			<img src="fork-button.png">
 		</div>
 		<div class="slide">
 			<h1>Trouver son fork, aka "origin"</h1>
@@ -182,7 +183,7 @@
 			<p><a href="https://twitter.com/mind_up_ig2i">Twitter</a></p>
 		</div>
 		<div id="schema">
-			<div id="upstream" class="repo">
+			<div id="upstream" class="repo box">
 				<h1>Upstream</h1>
 					<p>Source de vérité</p>
 				<a href="https://github.com/mind-up/mind-up-git-introduction">mind-up/mind-up-git-introduction</a>
@@ -195,7 +196,7 @@
 			</div>
 
 			<div id="forks">
-				<div class="fork repo">
+				<div class="fork repo box" id="loic-fork">
 					<h1>Fork Loïc Bourgois</h1>
 					<p>Ma version</p>
 					<a href="https://github.com/loicbourgois/mind-up-git-introduction">loicbourgois/mind-up-git-introduction</a>
@@ -204,19 +205,19 @@
 							<h2>Branche master</h2>
 							<a href="https://github.com/loicbourgois/mind-up-git-introduction/tree/master"><span class="light-text">github/loicbourgois/</span>remotes/origin/master</a>
 						</div>
-						<div class="branch" id="loic-feature-1">
+						<div class="branch box" id="loic-feature-1">
 							<h2>Branche merci</h2>
 							<a href="https://github.com/loicbourgois/mind-up-git-introduction/tree/merci"><span class="light-text">github/loicbourgois/</span>remotes/origin/merci</a>
 						</div>
 					</div>
 				</div>
-				<div class="fork repo">
+				<div class="fork repo box" id="jessy-fork">
 					<h1>Fork Jessy Vanderaugstraete</h1>
 					<p>Sa version</p>
 					<!-- TODO put real urls -->
 					<a href="https://github.com/thedeadc0der/mind-up-git-introduction">thedeadc0der/mind-up-git-introduction</a>
 					<div class="branches">
-						<div class="branch" id="jessy-feature-2">
+						<div class="branch box" id="jessy-feature-2">
 							<h2>Branche fonctionnalité #2</h2>
 							<a href="https://github.com/thedeadc0der/mind-up-git-introduction/tree/master"><span class="light-text">jessy/</span>remotes/origin/feature-2</a>
 						</div>
@@ -231,7 +232,7 @@
 			<div id="spacer"></div>
 
 			<div id="working">
-				<div class="fork repo">
+				<div class="fork repo box" id="loic-working">
 					<h1>Localhost Loïc Bourgois</h1>
 					<p>Mon espace de travail</p>
 					<a href="https://github.com/loicbourgois/mind-up-git-introduction">loicbourgois/mind-up-git-introduction</a>
@@ -240,19 +241,19 @@
 							<h2>Branche master</h2>
 							<a>master</a>
 						</div>
-						<div class="branch" id="loic-working-feature-1">
+						<div class="branch box" id="loic-working-feature-1">
 							<h2>Branche merci</h2>
 							<a>merci</a>
 						</div>
 					</div>
 				</div>
-				<div class="fork repo">
+				<div class="fork repo box" id="jessy-working">
 					<h1>Localhost Jessy Vanderaugstraete</h1>
 					<p>Son espace de travail</p>
 					<!-- TODO put real urls -->
 					<a href="https://github.com/loicbourgois/mind-up-git-introduction">jessyvande.../mind-up-git-introduction</a>
 					<div class="branches">
-						<div class="branch" id="jessy-working-feature-2">
+						<div class="branch box" id="jessy-working-feature-2">
 							<h2>Branche feature-2</h2>
 							<a>feature-2</a>
 						</div>
