@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-const colors = [ "#ffffff",
-=======
 const colors = [
 	"#ffffff",
->>>>>>> 68dc1e657e9fed5b42b34bba0717af8f5b729383
 	"#fefffe",
 	"#fdfffd",
 	"#fcfffc",
